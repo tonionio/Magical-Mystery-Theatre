@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magical Mystery Theatre</title>
+</head>
+<body>
+    <h1>Magical Mytery Theatre</h1>
+    <button type="button" onclick="buyTicket()">Purcahse Ticket</button>
+    
+    <script>
+        const GENERAL_ADMISSION = 30.00;
+        const STUDENT = 25.00;
+        const SENIOR = 20.00;
+        const CHILD = 15.00;
+        const MATINEE_DISCOUNT = 3.50;
+    
+        function buyTicket() {
+            const age = prompt('What is your age?');
+            let cost = getBaseTicketCost(age);
+            cost = matineeDiscount(cost);
+    
+            alert('Your ticket will cost $' + cost.toFixed(2));
+        }
+    
+        function matineeDiscount(cost) {
+            const isMatinee = prompt('Is this a matinee?');
+            if (isMatinee.toLowerCase() === 'yes' || isMatinee.toLowerCase() === 'y') {
+                cost -= MATINEE_DISCOUNT;
+            }
+            return cost;
+        }
+    
+        function getBaseTicketCost(age) {
+            if (age < 18) {
+                return CHILD;
+            } else if (age >= 18 && age <= 30) {
+                const isStudent = prompt('Are you a student?');
+                if (isStudent.toLowerCase() === 'yes' || isStudent.toLowerCase() === 'y') {
+                    return STUDENT;
+                } else {
+                    return GENERAL_ADMISSION;
+                }
+            } else if (age >= 65) {
+                return SENIOR;
+            } else {
+                return GENERAL_ADMISSION;
+            }
+        }
+    </script>    
+</body>
+</html>
